@@ -7,10 +7,14 @@ import {
   FaPrescriptionBottleAlt, FaShieldAlt,
   FaMapMarkedAlt, FaEnvelope, FaCapsules, FaClipboardList,
   FaHandHoldingMedical, FaFileInvoiceDollar, FaCalendarCheck,
-  FaPhone
+  FaPhone, FaCheck
 } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { useState } from 'react';
+import cosmetics1 from '../../assets/images/cosmetics1.jpg';
+import cosmetics2 from '../../assets/images/cosmetics2.jpg';
+import pharmacy1 from '../../assets/images/pharmacy1.jpg';
+import pharmacy2 from '../../assets/images/pharmacy2.jpg';
 
 // Add type for feature details
 type FeatureDetail = {
@@ -80,14 +84,33 @@ const Home = () => {
           <div className="hero-content">
             <h1>Pharmacy Made Simple</h1>
             <p className="subtitle">Get your prescriptions delivered for free, right to your door.</p>
+            <p className="tagline">Experience boutique pharmacy care with a modern touch. 
+              Where personalized service meets cutting-edge convenience.</p>
             
             <div className="search-container">
               <input 
-                type="text" 
-                placeholder="Enter your address to check delivery" 
+                placeholder="Enter delivery address"
                 className="search-input"
+                type="text"
               />
               <button className="btn btn-primary search-btn">Check Address</button>
+            </div>
+          </div>
+          
+          <div className="hero-background">
+            <div className="image-grid">
+              <div className="image-wrapper">
+                <img src={pharmacy1} alt="" className="hero-image" />
+              </div>
+              <div className="image-wrapper">
+                <img src={cosmetics1} alt="" className="hero-image" />
+              </div>
+              <div className="image-wrapper">
+                <img src={pharmacy2} alt="" className="hero-image" />
+              </div>
+              <div className="image-wrapper">
+                <img src={cosmetics2} alt="" className="hero-image" />
+              </div>
             </div>
           </div>
         </section>
@@ -116,12 +139,43 @@ const Home = () => {
               <div className="service-card">
                 <FaCapsules className="service-icon" />
                 <h3>New Prescriptions</h3>
-                <p>Easy transfer of your prescriptions to our pharmacy</p>
+                <p className="service-description">Easy transfer of your prescriptions to our pharmacy</p>
+                <ul className="service-features">
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Free prescription transfer service
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Same-day prescription filling
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Insurance coordination handled for you
+                  </li>
+                </ul>
+                <button className="btn btn-outline">Transfer Now</button>
               </div>
+
               <div className="service-card">
                 <FaClipboardList className="service-icon" />
                 <h3>Refills</h3>
-                <p>Quick and convenient prescription refills</p>
+                <p className="service-description">Quick and convenient prescription refills</p>
+                <ul className="service-features">
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Automated refill reminders
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Mobile app refill requests
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    24/7 online refill service
+                  </li>
+                </ul>
+                <button className="btn btn-outline">Request Refill</button>
               </div>
             </div>
           </div>
@@ -134,12 +188,43 @@ const Home = () => {
               <div className="service-card">
                 <FaUserMd className="service-icon" />
                 <h3>Medication Counseling</h3>
-                <p>Expert advice from our pharmacists</p>
+                <p className="service-description">Expert advice from our experienced pharmacists</p>
+                <ul className="service-features">
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Private consultation room
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Medication therapy reviews
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Drug interaction checks
+                  </li>
+                </ul>
+                <button className="btn btn-outline">Schedule Consultation</button>
               </div>
+
               <div className="service-card">
                 <FaCalendarCheck className="service-icon" />
                 <h3>Medication Synchronization</h3>
-                <p>Get all your medications on the same day</p>
+                <p className="service-description">Get all your medications on the same day each month</p>
+                <ul className="service-features">
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Coordinated refill schedule
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Monthly medication review
+                  </li>
+                  <li>
+                    <FaCheck className="check-icon" />
+                    Automatic refill program
+                  </li>
+                </ul>
+                <button className="btn btn-outline">Sync Medications</button>
               </div>
             </div>
           </div>
@@ -149,10 +234,27 @@ const Home = () => {
           <div className="section-content">
             <h2><FaShieldAlt /> Insurance</h2>
             <div className="insurance-content">
-              <FaFileInvoiceDollar className="large-icon" />
-              <div className="insurance-text">
-                <h3>We Accept Most Insurance Plans</h3>
-                <p>Contact us to verify your coverage</p>
+              <div className="insurance-card">
+                <FaFileInvoiceDollar className="large-icon" />
+                <div className="insurance-text">
+                  <h3>We Accept Most Insurance Plans</h3>
+                  <p className="insurance-description">Contact us to verify your coverage</p>
+                  <ul className="insurance-features">
+                    <li>
+                      <FaCheck className="check-icon" />
+                      Medicare Part D plans accepted
+                    </li>
+                    <li>
+                      <FaCheck className="check-icon" />
+                      Most major insurance providers
+                    </li>
+                    <li>
+                      <FaCheck className="check-icon" />
+                      Prescription discount programs
+                    </li>
+                  </ul>
+                  <button className="btn btn-outline">Verify Coverage</button>
+                </div>
               </div>
             </div>
           </div>
