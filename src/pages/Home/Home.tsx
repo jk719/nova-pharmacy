@@ -1,3 +1,4 @@
+import React from 'react';
 import novaLogo from '../../assets/images/nova-logo.png';
 import { BUSINESS_INFO } from '../../utils/constants';
 import './Home.css';
@@ -13,7 +14,7 @@ import { useState } from 'react';
 
 // Add type for feature details
 type FeatureDetail = {
-  icon: JSX.Element;
+  icon: React.ReactNode;
   description: string;
 };
 
