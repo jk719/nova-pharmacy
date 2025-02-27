@@ -13,29 +13,41 @@ export type GeocodingResult = {
 
 export const checkDeliveryRange = async (address: string): Promise<GeocodingResult> => {
   try {
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
-    );
+    console.log('Checking address:', address);
     
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`;
+    console.log('API URL:', url);
+    
+    const response = await fetch(url);
     const data = await response.json();
     
+    console.log('API Response:', data);
+    
     if (data.status !== 'OK') {
-      throw new Error('Address not found');
+      console.error('API Error Status:', data.status);
+      console.error('API Error Message:', data.error_message);
+      throw new Error(`Address not found: ${data.status}`);
     }
 
     const location = data.results[0].geometry.location;
+    console.log('Location found:', location);
+    
     const distance = calculateDistance(
       PHARMACY_LOCATION.lat,
       PHARMACY_LOCATION.lng,
       location.lat,
       location.lng
     );
+    
+    console.log('Calculated distance:', distance, 'miles');
+    console.log('Is in range:', distance <= DELIVERY_RADIUS);
 
     return {
       isInRange: distance <= DELIVERY_RADIUS,
       distance: Number(distance.toFixed(1))
     };
   } catch (err) {
+    console.error('Error in checkDeliveryRange:', err);
     return {
       isInRange: false,
       error: 'Unable to verify address. Please try again.'

@@ -7,7 +7,7 @@ import {
   FaPrescriptionBottleAlt, FaShieldAlt,
   FaMapMarkedAlt, FaEnvelope, FaCapsules, FaClipboardList,
   FaHandHoldingMedical, FaFileInvoiceDollar, FaCalendarCheck,
-  FaPhone, FaCheck
+  FaPhone, FaCheck, FaPercent, FaPhoneAlt, FaStar, FaClock
 } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { useState } from 'react';
@@ -99,10 +99,18 @@ const Home = () => {
       <main>
         <section className="hero">
           <div className="hero-content">
-            <h1>Pharmacy Made Simple</h1>
-            <p className="subtitle">Get your prescriptions delivered for free, right to your door.</p>
-            <p className="tagline">Experience boutique pharmacy care with a modern touch. 
-              Where personalized service meets cutting-edge convenience.</p>
+            <div className="hero-text">
+              <h1>
+                <span className="highlight">Modern Care,</span>
+                <br />
+                Traditional Values
+              </h1>
+              <p className="subtitle">Free same-day prescription delivery to your door</p>
+              <p className="tagline">
+                Experience personalized pharmacy care with a modern touch. 
+                Where boutique service meets digital convenience.
+              </p>
+            </div>
             
             <div className="search-container">
               <input 
@@ -178,20 +186,16 @@ const Home = () => {
                 <h3>New Prescriptions</h3>
                 <p className="service-description">Easy transfer of your prescriptions to our pharmacy</p>
                 <ul className="service-features">
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Free prescription transfer service
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Same-day prescription filling
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Insurance coordination handled for you
-                  </li>
+                  <li><FaCheck className="check-icon" />Free prescription transfer service</li>
+                  <li><FaCheck className="check-icon" />Same-day prescription filling</li>
+                  <li><FaCheck className="check-icon" />Insurance coordination handled for you</li>
                 </ul>
-                <button className="btn btn-outline">Transfer Now</button>
+                <div className="card-contact">
+                  <FaPhoneAlt className="phone-icon" />
+                  <a href={`tel:${BUSINESS_INFO.phone}`} className="contact-link">
+                    Call to inquire
+                  </a>
+                </div>
               </div>
 
               <div className="service-card">
@@ -199,20 +203,16 @@ const Home = () => {
                 <h3>Refills</h3>
                 <p className="service-description">Quick and convenient prescription refills</p>
                 <ul className="service-features">
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Automated refill reminders
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Mobile app refill requests
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    24/7 online refill service
-                  </li>
+                  <li><FaCheck className="check-icon" />Automated refill reminders</li>
+                  <li><FaCheck className="check-icon" />Mobile app refill requests</li>
+                  <li><FaCheck className="check-icon" />24/7 online refill service</li>
                 </ul>
-                <button className="btn btn-outline">Request Refill</button>
+                <div className="card-contact">
+                  <FaPhoneAlt className="phone-icon" />
+                  <a href={`tel:${BUSINESS_INFO.phone}`} className="contact-link">
+                    Call to inquire
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -227,20 +227,16 @@ const Home = () => {
                 <h3>Medication Counseling</h3>
                 <p className="service-description">Expert advice from our experienced pharmacists</p>
                 <ul className="service-features">
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Private consultation room
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Medication therapy reviews
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Drug interaction checks
-                  </li>
+                  <li><FaCheck className="check-icon" />Private consultation room</li>
+                  <li><FaCheck className="check-icon" />Medication therapy reviews</li>
+                  <li><FaCheck className="check-icon" />Drug interaction checks</li>
                 </ul>
-                <button className="btn btn-outline">Schedule Consultation</button>
+                <div className="card-contact">
+                  <FaPhoneAlt className="phone-icon" />
+                  <a href={`tel:${BUSINESS_INFO.phone}`} className="contact-link">
+                    Call to inquire
+                  </a>
+                </div>
               </div>
 
               <div className="service-card">
@@ -248,20 +244,16 @@ const Home = () => {
                 <h3>Medication Synchronization</h3>
                 <p className="service-description">Get all your medications on the same day each month</p>
                 <ul className="service-features">
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Coordinated refill schedule
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Monthly medication review
-                  </li>
-                  <li>
-                    <FaCheck className="check-icon" />
-                    Automatic refill program
-                  </li>
+                  <li><FaCheck className="check-icon" />Coordinated refill schedule</li>
+                  <li><FaCheck className="check-icon" />Monthly medication review</li>
+                  <li><FaCheck className="check-icon" />Automatic refill program</li>
                 </ul>
-                <button className="btn btn-outline">Sync Medications</button>
+                <div className="card-contact">
+                  <FaPhoneAlt className="phone-icon" />
+                  <a href={`tel:${BUSINESS_INFO.phone}`} className="contact-link">
+                    Call to inquire
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -269,28 +261,42 @@ const Home = () => {
 
         <section id="insurance" className="section">
           <div className="section-content">
-            <h2><FaShieldAlt /> Insurance</h2>
-            <div className="insurance-content">
-              <div className="insurance-card">
-                <FaFileInvoiceDollar className="large-icon" />
-                <div className="insurance-text">
-                  <h3>We Accept Most Insurance Plans</h3>
-                  <p className="insurance-description">Contact us to verify your coverage</p>
-                  <ul className="insurance-features">
-                    <li>
-                      <FaCheck className="check-icon" />
-                      Medicare Part D plans accepted
-                    </li>
-                    <li>
-                      <FaCheck className="check-icon" />
-                      Most major insurance providers
-                    </li>
-                    <li>
-                      <FaCheck className="check-icon" />
-                      Prescription discount programs
-                    </li>
-                  </ul>
-                  <button className="btn btn-outline">Verify Coverage</button>
+            <h2><FaShieldAlt /> Insurance Coverage</h2>
+            <div className="insurance-grid">
+              <div className="insurance-card primary">
+                <FaFileInvoiceDollar className="insurance-icon" />
+                <h3>Accepted Insurance Plans</h3>
+                <p className="insurance-description">
+                  We work with most major insurance providers to make your medications affordable
+                </p>
+                <ul className="insurance-features">
+                  <li><FaCheck /> Medicare Part D</li>
+                  <li><FaCheck /> Medicaid</li>
+                  <li><FaCheck /> Private Insurance</li>
+                  <li><FaCheck /> Workers' Compensation</li>
+                </ul>
+                <div className="card-contact">
+                  <FaPhoneAlt className="phone-icon" />
+                  <a href={`tel:${BUSINESS_INFO.phone}`} className="contact-link">
+                    Call to verify coverage
+                  </a>
+                </div>
+              </div>
+
+              <div className="service-card">
+                <FaPhoneAlt className="service-icon" />
+                <h3>Need Help?</h3>
+                <p className="service-description">Our team is here to assist with your insurance questions</p>
+                <ul className="service-features">
+                  <li><FaCheck className="check-icon" />Insurance verification</li>
+                  <li><FaCheck className="check-icon" />Coverage explanation</li>
+                  <li><FaCheck className="check-icon" />Cost estimates</li>
+                </ul>
+                <div className="card-contact">
+                  <FaPhoneAlt className="phone-icon" />
+                  <a href={`tel:${BUSINESS_INFO.phone}`} className="contact-link">
+                    Call to verify coverage
+                  </a>
                 </div>
               </div>
             </div>
@@ -301,12 +307,41 @@ const Home = () => {
           <div className="section-content">
             <h2><FaMapMarkedAlt /> Location</h2>
             <div className="location-content">
+              <div className="location-info">
+                <div className="location-details">
+                  <p><FaMapMarkedAlt /> {BUSINESS_INFO.address}</p>
+                  <p><FaPhone /> {BUSINESS_INFO.phone}</p>
+                  
+                  <div className="rating">
+                    <div className="rating-stars">
+                      {[...Array(5)].map((_, i) => (
+                        <FaStar 
+                          key={i} 
+                          className={i < BUSINESS_INFO.rating.score ? 'star-filled' : 'star-empty'} 
+                        />
+                      ))}
+                    </div>
+                    <span className="rating-text">
+                      {BUSINESS_INFO.rating.score.toFixed(1)} ({BUSINESS_INFO.rating.count} reviews)
+                    </span>
+                  </div>
+
+                  <div className="hours-container">
+                    <h3><FaClock /> Hours</h3>
+                    <div className="hours-grid">
+                      {Object.entries(BUSINESS_INFO.hours).map(([day, hours]) => (
+                        <div key={day} className="hours-row">
+                          <span className="day">{day.charAt(0).toUpperCase() + day.slice(1)}</span>
+                          <span className="hours">{hours}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               <div className="map-container">
                 {/* Add Google Maps iframe here */}
-              </div>
-              <div className="location-details">
-                <p><FaMapMarkedAlt /> {BUSINESS_INFO.address}</p>
-                <p><FaPhone /> {BUSINESS_INFO.phone}</p>
               </div>
             </div>
           </div>
