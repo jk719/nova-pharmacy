@@ -7,7 +7,7 @@ import {
   FaPrescriptionBottleAlt, FaShieldAlt,
   FaMapMarkedAlt, FaEnvelope, FaCapsules, FaClipboardList,
   FaHandHoldingMedical, FaFileInvoiceDollar, FaCalendarCheck,
-  FaPhone, FaCheck, FaPhoneAlt, FaStar, FaClock
+  FaPhone, FaCheck, FaPhoneAlt
 } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { useState } from 'react';
@@ -298,50 +298,6 @@ const Home = () => {
                     Call to verify coverage
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="locations" className="section">
-          <div className="section-content">
-            <h2><FaMapMarkedAlt /> Location</h2>
-            <div className="location-content">
-              <div className="location-info">
-                <div className="location-details">
-                  <p><FaMapMarkedAlt /> {BUSINESS_INFO.address}</p>
-                  <p><FaPhone /> {BUSINESS_INFO.phone}</p>
-                  
-                  <div className="rating">
-                    <div className="rating-stars">
-                      {[...Array(5)].map((_, i) => (
-                        <FaStar 
-                          key={i} 
-                          className={i < BUSINESS_INFO.rating.score ? 'star-filled' : 'star-empty'} 
-                        />
-                      ))}
-                    </div>
-                    <span className="rating-text">
-                      {BUSINESS_INFO.rating.score.toFixed(1)} ({BUSINESS_INFO.rating.count} reviews)
-                    </span>
-                  </div>
-
-                  <div className="hours-container">
-                    <h3><FaClock /> Hours</h3>
-                    <div className="hours-grid">
-                      {Object.entries(BUSINESS_INFO.hours).map(([day, hours]) => (
-                        <div key={day} className="hours-row">
-                          <span className="day">{day.charAt(0).toUpperCase() + day.slice(1)}</span>
-                          <span className="hours">{hours}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="map-container">
-                {/* Add Google Maps iframe here */}
               </div>
             </div>
           </div>
