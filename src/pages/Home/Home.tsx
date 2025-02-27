@@ -3,7 +3,7 @@ import { BUSINESS_INFO } from '../../utils/constants';
 import './Home.css';
 import { 
   FaBox, FaUserMd, FaMobile, FaBars, FaTimes, 
-  FaPrescriptionBottleAlt, FaHospital, FaShieldAlt,
+  FaPrescriptionBottleAlt, FaShieldAlt,
   FaMapMarkedAlt, FaEnvelope, FaCapsules, FaClipboardList,
   FaHandHoldingMedical, FaFileInvoiceDollar, FaCalendarCheck,
   FaPhone
@@ -11,10 +11,20 @@ import {
 import Footer from '../../components/Footer/Footer';
 import { useState } from 'react';
 
+// Add type for feature details
+type FeatureDetail = {
+  icon: JSX.Element;
+  description: string;
+};
+
+type FeatureDetails = {
+  [key: string]: FeatureDetail;
+};
+
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const featureDetails = {
+  const featureDetails: FeatureDetails = {
     "Free Same-Day Delivery": {
       icon: <FaBox />,
       description: "Get your medications delivered right to your door at no extra cost, same day"

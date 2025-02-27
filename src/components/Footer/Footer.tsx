@@ -1,4 +1,4 @@
-import { FaPhone, FaMapMarkerAlt, FaClock, FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaPhone, FaMapMarkerAlt, FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { BUSINESS_INFO } from '../../utils/constants';
 import './Footer.css';
 
