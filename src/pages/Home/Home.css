@@ -218,6 +218,11 @@ body {
   box-shadow: 0 4px 12px rgba(255, 167, 38, 0.3);
 }
 
+.search-btn.loading {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
 /* Features Section */
 .features {
   padding: 4rem 1rem;
@@ -1025,5 +1030,35 @@ body {
 
   .service-features li {
     font-size: 1rem;
+  }
+}
+
+.delivery-status {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.delivery-status.available {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.delivery-status.unavailable {
+  background: rgba(255, 68, 68, 0.1);
+  color: #ff4444;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .delivery-status {
+    font-size: 0.9rem;
+    padding: 0.75rem;
   }
 } 

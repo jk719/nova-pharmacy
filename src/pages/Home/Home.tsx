@@ -15,6 +15,7 @@ import cosmetics1 from '../../assets/images/cosmetics1.jpg';
 import cosmetics2 from '../../assets/images/cosmetics2.jpg';
 import pharmacy1 from '../../assets/images/pharmacy1.jpg';
 import pharmacy2 from '../../assets/images/pharmacy2.jpg';
+import { checkDeliveryRange, type GeocodingResult, DELIVERY_RADIUS } from '../../services/geocoding';
 
 // Add type for feature details
 type FeatureDetail = {
@@ -28,6 +29,9 @@ type FeatureDetails = {
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [address, setAddress] = useState('');
+  const [deliveryStatus, setDeliveryStatus] = useState<GeocodingResult | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const featureDetails: FeatureDetails = {
     "Free Same-Day Delivery": {
@@ -54,6 +58,19 @@ const Home = () => {
       icon: <FaClipboardList />,
       description: "Never miss a dose with our automatic refill program"
     }
+  };
+
+  const handleAddressCheck = async () => {
+    if (!address.trim()) {
+      return;
+    }
+
+    setLoading(true);
+    setDeliveryStatus(null);
+
+    const result = await checkDeliveryRange(address);
+    setDeliveryStatus(result);
+    setLoading(false);
   };
 
   return (
@@ -92,8 +109,28 @@ const Home = () => {
                 placeholder="Enter delivery address"
                 className="search-input"
                 type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleAddressCheck()}
               />
-              <button className="btn btn-primary search-btn">Check Address</button>
+              <button 
+                className={`btn btn-primary search-btn ${loading ? 'loading' : ''}`}
+                onClick={handleAddressCheck}
+                disabled={loading}
+              >
+                {loading ? 'Checking...' : 'Check Address'}
+              </button>
+              {deliveryStatus && (
+                <div className={`delivery-status ${deliveryStatus.isInRange ? 'available' : 'unavailable'}`}>
+                  {deliveryStatus.error ? (
+                    <p className="error-message">{deliveryStatus.error}</p>
+                  ) : deliveryStatus.isInRange ? (
+                    <p>✅ Great news! We deliver to your address ({deliveryStatus.distance} miles away)</p>
+                  ) : (
+                    <p>❌ Sorry, this address is outside our {DELIVERY_RADIUS}-mile delivery area</p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           
