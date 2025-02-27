@@ -89,7 +89,6 @@ const Home = () => {
               <li><a href="#prescriptions">Prescriptions</a></li>
               <li><a href="#services">Services</a></li>
               <li><a href="#insurance">Insurance</a></li>
-              <li><a href="#locations">Location</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
