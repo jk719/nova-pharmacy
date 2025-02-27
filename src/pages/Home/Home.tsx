@@ -7,7 +7,7 @@ import {
   FaPrescriptionBottleAlt, FaShieldAlt,
   FaMapMarkedAlt, FaEnvelope, FaCapsules, FaClipboardList,
   FaHandHoldingMedical, FaFileInvoiceDollar, FaCalendarCheck,
-  FaPhone, FaCheck, FaPercent, FaPhoneAlt, FaStar, FaClock
+  FaPhone, FaCheck, FaPhoneAlt, FaStar, FaClock
 } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { useState } from 'react';
