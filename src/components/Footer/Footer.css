@@ -1,0 +1,132 @@
+.footer {
+  background-color: var(--text-color);
+  color: var(--white);
+  padding: 2rem 0 0;
+}
+
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 0 1.5rem;
+}
+
+.footer-section {
+  text-align: center;
+}
+
+.footer-section h3 {
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+/* Hours section styles */
+.hours-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+}
+
+/* Contact section styles */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.contact-item svg {
+  color: var(--gold);
+}
+
+/* Quick links styles */
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-section a {
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-section a:hover {
+  color: var(--coral);
+}
+
+/* Social links styles */
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.social-link {
+  color: var(--white);
+  font-size: 1.5rem;
+  transition: all 0.2s;
+}
+
+.social-link:hover {
+  color: var(--coral);
+  transform: translateY(-2px);
+}
+
+/* Update the footer-bottom styles */
+.footer-bottom {
+  margin-top: 4rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: clamp(0.65rem, 2.5vw, 1rem); /* Dynamic font size based on viewport width */
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 4rem 0 0;
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 2rem;
+  }
+
+  .footer-section {
+    text-align: left;
+  }
+
+  .contact-item,
+  .social-links {
+    justify-content: flex-start;
+  }
+
+  .hours-row {
+    gap: 2rem;
+  }
+
+  .footer-bottom p {
+    font-size: 1rem; /* Fixed size on desktop */
+  }
+} 
