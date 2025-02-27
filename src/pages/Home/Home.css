@@ -147,18 +147,17 @@ body {
 .image-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
-  height: 100%;
-  max-width: 600px;
+  max-width: 800px;
+  height: 90%;
   margin: 0 auto;
 }
 
 .image-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 100%;
+  height: 100%;
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
