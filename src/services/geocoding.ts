@@ -1,5 +1,3 @@
-import { BUSINESS_INFO } from '../utils/constants';
-
 const PHARMACY_LOCATION = {
   lat: 40.75695, // Nova Pharmacy Queens coordinates
   lng: -73.86234
