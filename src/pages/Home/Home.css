@@ -875,7 +875,7 @@ body {
     overflow: hidden;
   }
 
-  /* Add a background image container */
+  /* Update background image container */
   .hero::before {
     content: '';
     position: absolute;
@@ -883,10 +883,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../../assets/images/pharmacy1.jpg');
+    background-image: url('../../assets/images/nova-storefront-image.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.15;  /* Make it very transparent */
+    opacity: 0.15;  /* Keep the overlay subtle */
     z-index: 1;
   }
 
@@ -895,7 +895,7 @@ body {
     width: 100%;
     padding: 2rem 1.5rem;
     text-align: center;
-    z-index: 2;  /* Above the background */
+    z-index: 2;
   }
 
   /* Hide the image grid on mobile */
