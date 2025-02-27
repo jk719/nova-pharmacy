@@ -5,9 +5,9 @@ import './Home.css';
 import { 
   FaBox, FaUserMd, FaMobile, FaBars, FaTimes, 
   FaPrescriptionBottleAlt, FaShieldAlt,
-  FaMapMarkedAlt, FaEnvelope, FaCapsules, FaClipboardList,
+  FaEnvelope, FaCapsules, FaClipboardList,
   FaHandHoldingMedical, FaFileInvoiceDollar, FaCalendarCheck,
-  FaPhone, FaCheck, FaPhoneAlt
+  FaCheck, FaPhoneAlt
 } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { useState } from 'react';
