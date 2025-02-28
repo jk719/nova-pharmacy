@@ -1164,4 +1164,44 @@ body {
   .feature-card {
     flex: 0 0 calc(33.333% - 2rem);
   }
+}
+
+/* Scroll Indicator Styles */
+@keyframes scrollPulse {
+  0% { transform: translateX(0); opacity: 0.8; }
+  50% { transform: translateX(10px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.8; }
+}
+
+.features-grid,
+.service-grid,
+.insurance-grid {
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .features-grid::after,
+  .service-grid::after,
+  .insurance-grid::after {
+    content: '→';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(229, 115, 115, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    animation: scrollPulse 1.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Hide the indicator when scrolled to the end */
+  .features-grid.at-end::after,
+  .service-grid.at-end::after,
+  .insurance-grid.at-end::after {
+    display: none;
+  }
 } 

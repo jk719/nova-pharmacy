@@ -33,6 +33,18 @@ const Home = () => {
   const [deliveryStatus, setDeliveryStatus] = useState<GeocodingResult | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // Add scroll event handlers
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const target = event.currentTarget;
+    const isAtEnd = target.scrollLeft + target.clientWidth >= target.scrollWidth - 20;
+    
+    if (isAtEnd) {
+      target.classList.add('at-end');
+    } else {
+      target.classList.remove('at-end');
+    }
+  };
+
   const featureDetails: FeatureDetails = {
     "Free Same-Day Delivery": {
       icon: <FaBox />,
@@ -161,7 +173,7 @@ const Home = () => {
 
         <section className="features">
           <h2>Experience a better pharmacy</h2>
-          <div className="features-grid">
+          <div className="features-grid" onScroll={handleScroll}>
             {BUSINESS_INFO.features.map((feature, index) => (
               <div key={index} className="feature-card">
                 <div className="feature-icon">
@@ -179,7 +191,7 @@ const Home = () => {
         <section id="prescriptions" className="section">
           <div className="section-content">
             <h2><FaPrescriptionBottleAlt /> Prescriptions</h2>
-            <div className="service-grid">
+            <div className="service-grid" onScroll={handleScroll}>
               <div className="service-card">
                 <FaCapsules className="service-icon" />
                 <h3>New Prescriptions</h3>
@@ -220,7 +232,7 @@ const Home = () => {
         <section id="services" className="section">
           <div className="section-content">
             <h2><FaHandHoldingMedical /> Services</h2>
-            <div className="service-grid">
+            <div className="service-grid" onScroll={handleScroll}>
               <div className="service-card">
                 <FaUserMd className="service-icon" />
                 <h3>Medication Counseling</h3>
@@ -261,7 +273,7 @@ const Home = () => {
         <section id="insurance" className="section">
           <div className="section-content">
             <h2><FaShieldAlt /> Insurance Coverage</h2>
-            <div className="insurance-grid">
+            <div className="insurance-grid" onScroll={handleScroll}>
               <div className="insurance-card primary">
                 <FaFileInvoiceDollar className="insurance-icon" />
                 <h3>Accepted Insurance Plans</h3>
