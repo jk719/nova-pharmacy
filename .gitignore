@@ -14,3 +14,8 @@ coverage
 .env.production.local
 .env
 .vercel
+dist/
+nova@0.0.0
+npm
+tsc
+vite

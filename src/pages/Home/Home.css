@@ -258,14 +258,23 @@ body {
 }
 
 .features-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  overflow-x: auto;
   gap: 2rem;
-  max-width: var(--max-width);
-  margin: 0 auto;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  margin: 0 -1rem;
+}
+
+.features-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .feature-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
   background: white;
   padding: 2rem;
   border-radius: var(--border-radius);
@@ -333,13 +342,23 @@ body {
 
 /* Service Grid */
 .service-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
+  display: flex;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -1rem;
+}
+
+.service-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .service-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
   background: white;
   padding: 3rem;
   border-radius: 20px;
@@ -447,15 +466,24 @@ body {
 
 /* Insurance Section */
 .insurance-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  overflow-x: auto;
   gap: 2rem;
-  margin-top: 2rem;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -1rem;
 }
 
-/* Use existing service-card styles for consistent look */
+.insurance-grid::-webkit-scrollbar {
+  display: none;
+}
+
 .insurance-card.primary,
 .insurance-grid .service-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
   background: white;
   padding: 2.5rem;
   border-radius: 20px;
@@ -600,25 +628,31 @@ body {
   }
 
   .features-grid {
-    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+    overflow-x: visible;
+    justify-content: center;
+    margin: 0 auto;
   }
 
   .service-grid {
-    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    overflow-x: visible;
+    justify-content: center;
+    margin: 0 auto;
   }
 
-  .insurance-content {
-    padding: 3rem;
+  .insurance-grid {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    justify-content: center;
+    margin: 0 auto;
   }
 
-  .location-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-  }
-
-  .feature-card {
-    padding: 2.5rem 2rem;
+  .feature-card,
+  .service-card,
+  .insurance-card.primary,
+  .insurance-grid .service-card {
+    flex: 0 0 calc(50% - 2rem);
   }
 
   .tagline {
@@ -1098,4 +1132,36 @@ body {
 
 .contact-link:hover {
   opacity: 0.8;
+}
+
+/* Add scroll indicators for mobile */
+.scroll-indicator {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .scroll-indicator {
+    display: block;
+  }
+}
+
+/* Add smooth scrolling behavior */
+.features-grid,
+.service-grid,
+.insurance-grid {
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1024px) {
+  .feature-card {
+    flex: 0 0 calc(33.333% - 2rem);
+  }
 } 
