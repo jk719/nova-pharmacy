@@ -4,7 +4,7 @@ import Home from './pages/Home/Home'
 
 function App() {
   return (
-    <Router basename="/nova-pharmacy">
+    <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
