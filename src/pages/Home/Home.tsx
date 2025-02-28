@@ -1,7 +1,7 @@
 import React from 'react';
 import novaLogo from '../../assets/images/nova-logo.png';
 import novaStorefront from '../../assets/images/nova-storefront-image.jpg';
-import { BUSINESS_INFO, DELIVERY_OPTIONS, type DeliveryOption } from '../../utils/constants';
+import { BUSINESS_INFO, DELIVERY_OPTIONS } from '../../utils/constants';
 import './Home.css';
 import { 
   FaBox, FaUserMd, FaMobile, FaBars, FaTimes, 
