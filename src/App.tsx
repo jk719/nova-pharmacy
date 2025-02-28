@@ -1,16 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css'
 import Home from './pages/Home/Home'
 
+// Enable future flags
+const router = {
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true
+  }
+};
+
 function App() {
   return (
-    <Router>
+    <BrowserRouter {...router}>
       <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <Home />
       </div>
-    </Router>
+    </BrowserRouter>
   )
 }
 

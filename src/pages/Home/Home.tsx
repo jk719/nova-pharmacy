@@ -1,21 +1,19 @@
 import React from 'react';
 import novaLogo from '../../assets/images/nova-logo.png';
-import { BUSINESS_INFO } from '../../utils/constants';
+import novaStorefront from '../../assets/images/nova-storefront-image.jpg';
+import { BUSINESS_INFO, DELIVERY_OPTIONS, type DeliveryOption } from '../../utils/constants';
 import './Home.css';
 import { 
   FaBox, FaUserMd, FaMobile, FaBars, FaTimes, 
   FaPrescriptionBottleAlt, FaShieldAlt,
   FaEnvelope, FaCapsules, FaClipboardList,
   FaHandHoldingMedical, FaFileInvoiceDollar, FaCalendarCheck,
-  FaCheck, FaPhoneAlt
+  FaCheck, FaPhoneAlt, FaRocket, FaBolt, FaTruck
 } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
 import { useState } from 'react';
-import cosmetics1 from '../../assets/images/cosmetics1.jpg';
-import cosmetics2 from '../../assets/images/cosmetics2.jpg';
-import pharmacy1 from '../../assets/images/pharmacy1.jpg';
-import pharmacy2 from '../../assets/images/pharmacy2.jpg';
 import { checkDeliveryRange, type GeocodingResult, DELIVERY_RADIUS } from '../../services/geocoding';
+import { LoadScript, Autocomplete } from '@react-google-maps/api';
 
 // Add type for feature details
 type FeatureDetail = {
@@ -32,6 +30,47 @@ const Home = () => {
   const [address, setAddress] = useState('');
   const [deliveryStatus, setDeliveryStatus] = useState<GeocodingResult | null>(null);
   const [loading, setLoading] = useState(false);
+  const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
+  const [selectedDelivery, setSelectedDelivery] = useState<string>('standard');
+
+  const onLoad = (autocomplete: google.maps.places.Autocomplete) => {
+    setAutocomplete(autocomplete);
+  };
+
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      const place = autocomplete.getPlace();
+      if (place.formatted_address) {
+        setAddress(place.formatted_address);
+        handleAddressCheck(place.formatted_address);
+      }
+    }
+  };
+
+  const handleAddressCheck = async (addressToCheck: string = address) => {
+    if (!addressToCheck.trim()) {
+      setDeliveryStatus({
+        isInRange: false,
+        error: 'Please enter a delivery address'
+      });
+      return;
+    }
+
+    setLoading(true);
+    setDeliveryStatus(null);
+
+    try {
+      const result = await checkDeliveryRange(addressToCheck);
+      setDeliveryStatus(result);
+    } catch (error) {
+      setDeliveryStatus({
+        isInRange: false,
+        error: 'An error occurred while checking the address. Please try again.'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Add scroll event handlers
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
@@ -72,19 +111,6 @@ const Home = () => {
     }
   };
 
-  const handleAddressCheck = async () => {
-    if (!address.trim()) {
-      return;
-    }
-
-    setLoading(true);
-    setDeliveryStatus(null);
-
-    const result = await checkDeliveryRange(address);
-    setDeliveryStatus(result);
-    setLoading(false);
-  };
-
   return (
     <div className="home">
       <header className="header">
@@ -108,7 +134,15 @@ const Home = () => {
       </header>
 
       <main>
-        <section className="hero">
+        <section 
+          className={`hero ${deliveryStatus ? 'address-active' : ''}`}
+          style={{ 
+            '--hero-bg-image': `url(${novaStorefront})`,
+            backgroundImage: `url(${novaStorefront})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          } as React.CSSProperties}
+        >
           <div className="hero-content">
             <div className="hero-text">
               <h1>
@@ -124,49 +158,115 @@ const Home = () => {
             </div>
             
             <div className="search-container">
-              <input 
-                placeholder="Enter delivery address"
-                className="search-input"
-                type="text"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleAddressCheck()}
-              />
+              <LoadScript 
+                googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                libraries={['places']}
+              >
+                <div className="search-input-wrapper">
+                  <Autocomplete
+                    onLoad={onLoad}
+                    onPlaceChanged={onPlaceChanged}
+                    restrictions={{ country: 'us' }}
+                    fields={['formatted_address', 'geometry']}
+                  >
+                    <input 
+                      placeholder="Enter delivery address"
+                      className="search-input"
+                      type="text"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      disabled={loading}
+                      aria-label="Delivery address"
+                      autoComplete="off"
+                    />
+                  </Autocomplete>
+                </div>
+              </LoadScript>
               <button 
                 className={`btn btn-primary search-btn ${loading ? 'loading' : ''}`}
-                onClick={handleAddressCheck}
+                onClick={() => handleAddressCheck()}
                 disabled={loading}
+                aria-label="Check delivery availability"
               >
                 {loading ? 'Checking...' : 'Check Address'}
               </button>
               {deliveryStatus && (
-                <div className={`delivery-status ${deliveryStatus.isInRange ? 'available' : 'unavailable'}`}>
+                <div 
+                  className={`delivery-status ${deliveryStatus.isInRange ? 'available' : 'unavailable'}`}
+                  role="alert"
+                  aria-live="polite"
+                >
                   {deliveryStatus.error ? (
                     <p className="error-message">{deliveryStatus.error}</p>
                   ) : deliveryStatus.isInRange ? (
-                    <p>✅ Great news! We deliver to your address ({deliveryStatus.distance} miles away)</p>
+                    <>
+                      <p>✅ Great news! We deliver to:</p>
+                      <p className="formatted-address">{deliveryStatus.formattedAddress}</p>
+                      <p className="distance">({deliveryStatus.distance} miles away)</p>
+                      
+                      <div className="delivery-options">
+                        <h4>Choose Your Delivery Speed:</h4>
+                        <div className="delivery-options-grid">
+                          {Object.values(DELIVERY_OPTIONS).map((option) => {
+                            const getIcon = (id: string) => {
+                              switch(id) {
+                                case 'standard':
+                                  return <FaTruck className="delivery-icon" />;
+                                case 'two_hour':
+                                  return <FaRocket className="delivery-icon" />;
+                                case 'one_hour':
+                                  return <FaBolt className="delivery-icon" />;
+                                default:
+                                  return <FaTruck className="delivery-icon" />;
+                              }
+                            };
+
+                            return (
+                              <label 
+                                key={option.id}
+                                className={`delivery-option ${selectedDelivery === option.id ? 'selected' : ''}`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="deliveryOption"
+                                  value={option.id}
+                                  checked={selectedDelivery === option.id}
+                                  onChange={(e) => setSelectedDelivery(e.target.value)}
+                                  className="delivery-radio"
+                                />
+                                <div className="delivery-option-content">
+                                  <div className="delivery-option-header">
+                                    <div className="delivery-option-left">
+                                      {getIcon(option.id)}
+                                      <div className="delivery-option-text">
+                                        <span className="delivery-option-label">{option.label}</span>
+                                        <span className="delivery-option-time">
+                                          <FaCalendarCheck />
+                                          {option.time}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <span className="delivery-option-price">
+                                      {option.price === 0 ? 'FREE' : `$${option.price}`}
+                                    </span>
+                                  </div>
+                                  <span className="delivery-option-description">{option.description}</span>
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </>
                   ) : (
-                    <p>❌ Sorry, this address is outside our {DELIVERY_RADIUS}-mile delivery area</p>
+                    <>
+                      <p>❌ Sorry, this address is outside our delivery area:</p>
+                      <p className="formatted-address">{deliveryStatus.formattedAddress}</p>
+                      <p className="distance">({deliveryStatus.distance} miles away - we only deliver within {DELIVERY_RADIUS} miles)</p>
+                    </>
                   )}
                 </div>
               )}
-            </div>
-          </div>
-          
-          <div className="hero-background">
-            <div className="image-grid">
-              <div className="image-wrapper">
-                <img src={pharmacy1} alt="" className="hero-image" />
-              </div>
-              <div className="image-wrapper">
-                <img src={cosmetics1} alt="" className="hero-image" />
-              </div>
-              <div className="image-wrapper">
-                <img src={pharmacy2} alt="" className="hero-image" />
-              </div>
-              <div className="image-wrapper">
-                <img src={cosmetics2} alt="" className="hero-image" />
-              </div>
             </div>
           </div>
         </section>

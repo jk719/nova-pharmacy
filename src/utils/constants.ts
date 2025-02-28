@@ -23,4 +23,30 @@ export const BUSINESS_INFO = {
     score: 5.0,
     count: 4
   }
-}; 
+};
+
+export const DELIVERY_OPTIONS = {
+  STANDARD: {
+    id: 'standard',
+    label: 'Standard Delivery',
+    time: 'Same Day',
+    price: 0,
+    description: 'Free same-day delivery'
+  },
+  TWO_HOUR: {
+    id: 'two_hour',
+    label: '2-Hour Delivery',
+    time: '2 Hours',
+    price: 5,
+    description: 'Delivered within 2 hours'
+  },
+  ONE_HOUR: {
+    id: 'one_hour',
+    label: '1-Hour Delivery',
+    time: '1 Hour',
+    price: 7,
+    description: 'Delivered within 1 hour'
+  }
+};
+
+export type DeliveryOption = typeof DELIVERY_OPTIONS[keyof typeof DELIVERY_OPTIONS]; 
