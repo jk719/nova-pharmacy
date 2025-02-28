@@ -86,10 +86,10 @@ const Home = () => {
               {isMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
             <ul className={`nav-links ${isMenuOpen ? 'show' : ''}`}>
-              <li><a href="#prescriptions">Prescriptions</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#insurance">Insurance</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#prescriptions" onClick={() => setIsMenuOpen(false)}>Prescriptions</a></li>
+              <li><a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a></li>
+              <li><a href="#insurance" onClick={() => setIsMenuOpen(false)}>Insurance</a></li>
+              <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
             </ul>
           </div>
         </nav>
